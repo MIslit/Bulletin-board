@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+
+<table>
+    {% for ad in ads %}
+        {% include '_ad.html' %}
+    {% endfor %}
+</table>
+
+{% endblock %}

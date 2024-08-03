@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block styles %}
+            {{ bootstrap.load_css() }}
+        {% endblock %}
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>Доска объявлений</title>
+        {% endif %}
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="{{ url_for('index') }}">
+                    Доска объявлений
+                  </a>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Главная</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('place_on_ad') }}">
+                            Разместить объявление
+                        </a>
+                      </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nav-link active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Категории
+                        </a>
+                        <ul class="dropdown-menu">
+                          {% for cat in category %}
+                          <li><a class="dropdown-item" href="/category/{{ cat.name }}">{{ cat.name }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </li>
+                    </ul>
+                    <form method="post" class="d-flex" role="search">
+                      <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" name="search">
+                      <button class="btn btn-outline-success" type="submit" name="submit">Поиск</button>
+                    </form>
+                    <ul class="nav justify-content-end navbar-nav">
+                      <li>
+                        {% if current_user.is_active %}
+                            <a class="nav-link active" href="{{ url_for('logout') }}">Выйти</a>
+                            {% else %}
+                            <a class="nav-link active" href="{{ url_for('login') }}">Войти</a>
+                        {% endif %}
+                      </li>
+                    </ul>
+                </div>
+                </div>
+            </nav>
+        </div>
+        <div class="container mt-3">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock content %}
+            {% block scripts %}
+                {{ bootstrap.load_js() }}
+            {% endblock %}
+        </div>
+        {{ moment.include_moment() }}
+    </body>
+</html>
+

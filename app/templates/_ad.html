@@ -1,0 +1,13 @@
+
+    <div class="card" style="width: 25rem;">
+        <img src="{{ image }}{{ ad.id }}.jpg" class="card-img-top" height="300px">
+        <div class="card-body">
+            <div>
+            <h5 class="card-title"><a href="{{ url_for('current_ad', id=ad.id)}}">{{ ad.title|make_shorter(25) }}</a></h5><h5> {{ ad.price }} РУБ</h5>
+            </div>
+            <p class="card-text">{{ ad.text|make_shorter(50) }}</p>
+        </div>
+        <div class="card-footer">
+            <small class="text-body-secondary">{{ moment(ad.timestamp).fromNow() }}</small>
+        </div>
+    </div>

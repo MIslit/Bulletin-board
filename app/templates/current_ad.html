@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block content %}
+    <table class="table table-hover">
+        <tr>
+            <td>
+                <h1>{{ ad.title }}</h1>
+                <h1>{{ user.email }}</h1>    
+                <img src="{{ image }}" class="img-fluid">
+            </td>
+            <td width="325px">    
+                <h4>{{ ad.price }} РУБ</h4>
+                <h4>{{ render_form(form) }}</h4>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <p>{{ ad.text }}</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            <p>Контактное лицо: {{ ad.author.username }}</p>
+            <p>Телефон: </p>
+            <p>Email: {{ ad.author.email }}</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Дата размещения: {{ moment(ad.timestamp).format('LLL') }}</p>
+            </td>
+        </tr>
+    </table>
+    {% for ad in ads %}
+        {% include '_ad.html' %}
+    {% endfor %}
+    
+{% endblock %}

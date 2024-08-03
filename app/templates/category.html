@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table>
+        <tr>
+            <td>
+            {% for ad in ads %}
+                {% include '_ad.html' %}
+            {% endfor %}
+            <td>
+        </tr>
+    </table>
+{% endblock content %}
